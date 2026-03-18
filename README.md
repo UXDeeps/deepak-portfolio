@@ -1,6 +1,6 @@
 # Deepak Sharma — Portfolio
 
-A personal designer portfolio site inspired by [billysweeney.com](https://billysweeney.com), featuring an audience-switcher intro section.
+A personal designer portfolio site featuring an audience-switcher intro section.
 
 ## Project Status
 This is an in-progress single-page HTML portfolio. The intro/hero section is complete. The rest of the site still needs to be built out.
@@ -15,7 +15,7 @@ This is an in-progress single-page HTML portfolio. The intro/hero section is com
 ## Design Decisions
 - Typography: Fraunces (serif, display) + DM Sans (sans-serif, UI)
 - Palette: near-black ink (`#0f0f0f`) on warm off-white (`#fafaf8`)
-- Style: editorial minimalism, inspired by billysweeney.com
+- Style: editorial minimalism
 - Tabs use `data-tab` / `data-panel` attributes for JS targeting
 - Fade-up animation on panel switch via CSS keyframes
 
