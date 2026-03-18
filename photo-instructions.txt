@@ -1,0 +1,11 @@
+Add your photo here and name it photo.jpg
+
+Then in index.html, replace:
+
+  <div class="photo-placeholder">
+    ...
+  </div>
+
+With:
+
+  <img class="hero-photo" src="photo.jpg" alt="Deepak Sharma">
