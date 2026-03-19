@@ -136,47 +136,29 @@
   }
   .nav-links a:hover { color: var(--ink); }
 
-  /* Theme slider - floating bottom left */
-  .theme-slider-wrap {
+  /* Dark mode toggle */
+  .dark-toggle {
     position: fixed;
     bottom: 1.5rem;
     left: 1.5rem;
     z-index: 200;
-    display: flex;
-    align-items: center;
-    gap: 0;
-    background: var(--surface);
+    width: 44px;
+    height: 44px;
     border: 1px solid var(--border);
-    border-radius: 100px;
-    padding: 0;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-    transition: background 0.5s ease, border-color 0.5s ease, box-shadow 0.35s ease, padding 0.4s cubic-bezier(0.16, 1, 0.3, 1), gap 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    overflow: hidden;
-  }
-  .theme-slider-wrap:hover {
-    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
-  }
-  .theme-slider-wrap.open {
-    padding: 8px 16px;
-    gap: 10px;
-  }
-  .theme-trigger {
-    width: 40px;
-    height: 40px;
-    border: none;
-    background: none;
+    border-radius: 50%;
+    background: var(--surface);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;
-    border-radius: 50%;
-    transition: background 0.35s ease;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    transition: background 0.5s ease, border-color 0.5s ease, box-shadow 0.35s ease, transform 0.35s ease;
   }
-  .theme-trigger:hover {
-    background: var(--border);
+  .dark-toggle:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    transform: scale(1.08);
   }
-  .theme-trigger svg {
+  .dark-toggle svg {
     width: 20px;
     height: 20px;
     stroke: var(--ink-muted);
@@ -184,70 +166,21 @@
     stroke-width: 1.5;
     stroke-linecap: round;
     stroke-linejoin: round;
-    transition: stroke 0.35s ease, transform 0.4s ease;
+    transition: stroke 0.35s ease, opacity 0.35s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .theme-trigger:hover svg { stroke: var(--ink); }
-  .theme-slider-wrap.open .theme-trigger svg {
-    transform: rotate(180deg);
-  }
-  .theme-slider-inner {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    max-width: 0;
+  .dark-toggle:hover svg { stroke: var(--ink); }
+  .dark-toggle .icon-moon {
+    position: absolute;
     opacity: 0;
-    overflow: hidden;
-    transition: max-width 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+    transform: rotate(-90deg) scale(0.6);
   }
-  .theme-slider-wrap.open .theme-slider-inner {
-    max-width: 200px;
+  [data-theme="dark"] .dark-toggle .icon-sun {
+    opacity: 0;
+    transform: rotate(90deg) scale(0.6);
+  }
+  [data-theme="dark"] .dark-toggle .icon-moon {
     opacity: 1;
-  }
-  .theme-label {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.65rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--ink-muted);
-    min-width: 42px;
-    text-align: right;
-    transition: color 0.35s ease;
-    white-space: nowrap;
-  }
-  .theme-slider {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 120px;
-    height: 6px;
-    border-radius: 3px;
-    background: linear-gradient(to right, #fafaf8 0%, #d2f34a 20%, #64b5f6 40%, #ff7043 60%, #26a69a 80%, #0a0a0a 100%);
-    outline: none;
-    cursor: pointer;
-    border: 1px solid var(--border);
-    transition: border-color 0.35s ease;
-  }
-  .theme-slider:hover { border-color: var(--ink); }
-  .theme-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background: var(--accent);
-    border: 2px solid var(--surface);
-    box-shadow: 0 0 0 1px var(--border), 0 1px 4px rgba(0,0,0,0.2);
-    cursor: pointer;
-    transition: background 0.35s ease, border-color 0.35s ease;
-  }
-  .theme-slider::-moz-range-thumb {
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background: var(--accent);
-    border: 2px solid var(--surface);
-    box-shadow: 0 0 0 1px var(--border), 0 1px 4px rgba(0,0,0,0.2);
-    cursor: pointer;
-    transition: background 0.35s ease, border-color 0.35s ease;
+    transform: rotate(0) scale(1);
   }
 
   /* Hero */
@@ -274,61 +207,35 @@
     will-change: transform;
   }
   .hero-gradient-bg .blob-1 {
-    width: 45%;
+    width: 55%;
     aspect-ratio: 1;
     background: radial-gradient(circle, #ff8c42 0%, transparent 65%);
-    top: -10%;
+    top: 0%;
     left: -5%;
-    animation: liquid1 14s ease-in-out infinite;
+    animation: liquid1 10s ease-in-out infinite;
   }
   .hero-gradient-bg .blob-2 {
-    width: 40%;
+    width: 55%;
     aspect-ratio: 1;
     background: radial-gradient(circle, #4a90d9 0%, transparent 65%);
-    top: 20%;
-    right: -10%;
-    animation: liquid2 16s ease-in-out infinite;
-  }
-  .hero-gradient-bg .blob-3 {
-    width: 50%;
-    aspect-ratio: 1;
-    background: radial-gradient(circle, #f0a060 0%, transparent 65%);
-    bottom: -15%;
-    left: 25%;
-    animation: liquid3 18s ease-in-out infinite;
-  }
-  .hero-gradient-bg .blob-4 {
-    width: 35%;
-    aspect-ratio: 1;
-    background: radial-gradient(circle, #5ba8e8 0%, transparent 65%);
-    top: 50%;
-    left: -10%;
-    animation: liquid4 20s ease-in-out infinite;
+    bottom: -5%;
+    right: 5%;
+    animation: liquid2 12s ease-in-out infinite;
   }
 
   @keyframes liquid1 {
     0%, 100% { transform: translate(0, 0) scale(1); }
-    25% { transform: translate(15%, 20%) scale(1.1); }
-    50% { transform: translate(5%, 35%) scale(0.95); }
-    75% { transform: translate(-10%, 15%) scale(1.05); }
+    20% { transform: translate(25%, 30%) scale(1.15); }
+    40% { transform: translate(40%, 10%) scale(0.9); }
+    60% { transform: translate(10%, 45%) scale(1.1); }
+    80% { transform: translate(-15%, 20%) scale(1.05); }
   }
   @keyframes liquid2 {
     0%, 100% { transform: translate(0, 0) scale(1); }
-    25% { transform: translate(-20%, 10%) scale(1.15); }
-    50% { transform: translate(-10%, -15%) scale(0.9); }
-    75% { transform: translate(5%, -10%) scale(1.1); }
-  }
-  @keyframes liquid3 {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    25% { transform: translate(10%, -20%) scale(1.05); }
-    50% { transform: translate(-15%, -10%) scale(1.15); }
-    75% { transform: translate(-5%, 10%) scale(0.95); }
-  }
-  @keyframes liquid4 {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    25% { transform: translate(20%, -15%) scale(1.1); }
-    50% { transform: translate(15%, 10%) scale(0.9); }
-    75% { transform: translate(-5%, 20%) scale(1.05); }
+    20% { transform: translate(-30%, 15%) scale(1.2); }
+    40% { transform: translate(-15%, -25%) scale(0.85); }
+    60% { transform: translate(-40%, -10%) scale(1.1); }
+    80% { transform: translate(-10%, -20%) scale(1.15); }
   }
 
   .hero-left {
@@ -704,8 +611,6 @@
     <div class="hero-gradient-bg">
       <div class="blob blob-1"></div>
       <div class="blob blob-2"></div>
-      <div class="blob blob-3"></div>
-      <div class="blob blob-4"></div>
     </div>
 
     <div class="hero-left">
@@ -889,17 +794,10 @@
     <a href="mailto:inbox.deepaksharma@gmail.com">inbox.deepaksharma@gmail.com</a>
   </footer>
 
-  <!-- Theme slider disabled for now
-  <div class="theme-slider-wrap">
-    <button class="theme-trigger" aria-label="Toggle theme picker">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-    </button>
-    <div class="theme-slider-inner">
-      <input type="range" class="theme-slider" min="0" max="5" value="0" step="1" aria-label="Change color theme">
-      <span class="theme-label">Light</span>
-    </div>
-  </div>
-  -->
+  <button class="dark-toggle" aria-label="Toggle dark mode">
+    <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>
+  </button>
 
 </div>
 
@@ -932,42 +830,26 @@
   }, { threshold: 0.15 });
   reveals.forEach(function(el) { observer.observe(el); });
 
-  // Theme slider toggle
-  var trigger = document.querySelector('.theme-trigger');
-  var wrap = document.querySelector('.theme-slider-wrap');
-  trigger.addEventListener('click', function() {
-    wrap.classList.toggle('open');
-  });
-  document.addEventListener('click', function(e) {
-    if (!wrap.contains(e.target)) wrap.classList.remove('open');
-  });
-
-  // Theme slider
-  var themes = ['light', 'neon', 'ocean', 'ember', 'forest', 'dark'];
-  var themeNames = { light: 'Light', neon: 'Neon', ocean: 'Ocean', ember: 'Ember', forest: 'Forest', dark: 'Dark' };
-  var slider = document.querySelector('.theme-slider');
-  var label = document.querySelector('.theme-label');
+  // Dark mode toggle
+  var darkToggle = document.querySelector('.dark-toggle');
   var html = document.documentElement;
 
-  function applyTheme(idx) {
-    var theme = themes[idx];
-    if (theme === 'light') {
-      html.removeAttribute('data-theme');
+  function setDark(on) {
+    if (on) {
+      html.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
     } else {
-      html.setAttribute('data-theme', theme);
+      html.removeAttribute('data-theme');
+      localStorage.setItem('theme', 'light');
     }
-    label.textContent = themeNames[theme];
-    slider.value = idx;
-    localStorage.setItem('theme', theme);
   }
 
   var saved = localStorage.getItem('theme');
-  if (saved && themes.indexOf(saved) > -1) {
-    applyTheme(themes.indexOf(saved));
-  }
+  if (saved === 'dark') setDark(true);
 
-  slider.addEventListener('input', function() {
-    applyTheme(parseInt(this.value));
+  darkToggle.addEventListener('click', function() {
+    var isDark = html.getAttribute('data-theme') === 'dark';
+    setDark(!isDark);
   });
 </script>
 </body>
