@@ -176,15 +176,18 @@
   .theme-trigger:hover {
     background: var(--border);
   }
-  .theme-trigger-dot {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: conic-gradient(#fafaf8, #d2f34a, #64b5f6, #ff7043, #26a69a, #0a0a0a, #fafaf8);
-    border: 2px solid var(--border);
-    transition: border-color 0.35s ease, transform 0.4s ease;
+  .theme-trigger svg {
+    width: 20px;
+    height: 20px;
+    stroke: var(--ink-muted);
+    fill: none;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: stroke 0.35s ease, transform 0.4s ease;
   }
-  .theme-slider-wrap.open .theme-trigger-dot {
+  .theme-trigger:hover svg { stroke: var(--ink); }
+  .theme-slider-wrap.open .theme-trigger svg {
     transform: rotate(180deg);
   }
   .theme-slider-inner {
@@ -802,15 +805,17 @@
     <a href="mailto:inbox.deepaksharma@gmail.com">inbox.deepaksharma@gmail.com</a>
   </footer>
 
+  <!-- Theme slider disabled for now
   <div class="theme-slider-wrap">
     <button class="theme-trigger" aria-label="Toggle theme picker">
-      <span class="theme-trigger-dot"></span>
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
     </button>
     <div class="theme-slider-inner">
       <input type="range" class="theme-slider" min="0" max="5" value="0" step="1" aria-label="Change color theme">
       <span class="theme-label">Light</span>
     </div>
   </div>
+  -->
 
 </div>
 
