@@ -25,16 +25,67 @@
     --border: #e8e8e4;
     --photo-bg: #f0ede8;
     --card-bg: #eae7e2;
+    --accent: #0f0f0f;
   }
 
+  /* Neon — bright lime on black. High luminance contrast. Safe for all types. */
+  [data-theme="neon"] {
+    --ink: #0a0a0a;
+    --ink-muted: #4a5a30;
+    --surface: #d2f34a;
+    --surface-alt: #c5e842;
+    --border: #a8be30;
+    --photo-bg: #bde03e;
+    --card-bg: #c5e842;
+    --accent: #0a0a0a;
+  }
+
+  /* Ocean — white on deep blue. High contrast, distinctive hue for all vision types. */
+  [data-theme="ocean"] {
+    --ink: #ffffff;
+    --ink-muted: #90b8e0;
+    --surface: #0d47a1;
+    --surface-alt: #0b3d8c;
+    --border: #1a5bb8;
+    --photo-bg: #093578;
+    --card-bg: #0b3d8c;
+    --accent: #64b5f6;
+  }
+
+  /* Ember — warm orange-red on dark. Shifted toward orange for red-green safety. */
+  [data-theme="ember"] {
+    --ink: #fff0e8;
+    --ink-muted: #d49878;
+    --surface: #1a0c08;
+    --surface-alt: #261510;
+    --border: #3d2218;
+    --photo-bg: #221510;
+    --card-bg: #2a1812;
+    --accent: #ff7043;
+  }
+
+  /* Forest — light green on deep teal-green. Blue-shifted to separate from ember for CVD. */
+  [data-theme="forest"] {
+    --ink: #e0f0f0;
+    --ink-muted: #78b0a0;
+    --surface: #0a1f1a;
+    --surface-alt: #0e2a22;
+    --border: #184038;
+    --photo-bg: #0c2820;
+    --card-bg: #103228;
+    --accent: #26a69a;
+  }
+
+  /* Dark — neutral gray on black. No hue, maximum clarity. */
   [data-theme="dark"] {
     --ink: #e8e8e4;
-    --ink-muted: #999;
-    --surface: #111110;
-    --surface-alt: #1a1a18;
-    --border: #2a2a28;
-    --photo-bg: #1e1e1c;
-    --card-bg: #222220;
+    --ink-muted: #777;
+    --surface: #0a0a0a;
+    --surface-alt: #131312;
+    --border: #222220;
+    --photo-bg: #151514;
+    --card-bg: #1a1a18;
+    --accent: #aaa;
   }
 
   html {
@@ -47,6 +98,7 @@
     color: var(--ink);
     font-family: 'DM Sans', sans-serif;
     -webkit-font-smoothing: antialiased;
+    transition: background 0.5s ease, color 0.5s ease;
   }
 
   .page {
@@ -64,6 +116,7 @@
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid var(--border);
+    transition: background 0.5s ease, border-color 0.5s ease;
   }
   .logo {
     font-family: 'Fraunces', serif;
@@ -72,7 +125,6 @@
     color: var(--ink);
     text-decoration: none;
   }
-  .nav-right { display: flex; gap: 2.5rem; align-items: center; }
   .nav-links { display: flex; gap: 2.5rem; list-style: none; }
   .nav-links a {
     font-size: 0.8rem;
@@ -80,29 +132,120 @@
     text-decoration: none;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    transition: color 0.2s;
+    transition: color 0.35s ease;
   }
   .nav-links a:hover { color: var(--ink); }
 
-  /* Dark mode toggle */
-  .theme-toggle {
-    background: none;
+  /* Theme slider - floating bottom left */
+  .theme-slider-wrap {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
+    border-radius: 100px;
+    padding: 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    transition: background 0.5s ease, border-color 0.5s ease, box-shadow 0.35s ease, padding 0.4s cubic-bezier(0.16, 1, 0.3, 1), gap 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+  }
+  .theme-slider-wrap:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+  }
+  .theme-slider-wrap.open {
+    padding: 8px 16px;
+    gap: 10px;
+  }
+  .theme-trigger {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: none;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: border-color 0.2s;
-    color: var(--ink-muted);
+    flex-shrink: 0;
+    border-radius: 50%;
+    transition: background 0.35s ease;
   }
-  .theme-toggle:hover { border-color: var(--ink); color: var(--ink); }
-  .theme-toggle svg { width: 18px; height: 18px; }
-  [data-theme="dark"] .theme-toggle .icon-moon { display: none; }
-  [data-theme="dark"] .theme-toggle .icon-sun { display: block; }
-  .theme-toggle .icon-sun { display: none; }
+  .theme-trigger:hover {
+    background: var(--border);
+  }
+  .theme-trigger-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: conic-gradient(#fafaf8, #d2f34a, #64b5f6, #ff7043, #26a69a, #0a0a0a, #fafaf8);
+    border: 2px solid var(--border);
+    transition: border-color 0.35s ease, transform 0.4s ease;
+  }
+  .theme-slider-wrap.open .theme-trigger-dot {
+    transform: rotate(180deg);
+  }
+  .theme-slider-inner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-width 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  }
+  .theme-slider-wrap.open .theme-slider-inner {
+    max-width: 200px;
+    opacity: 1;
+  }
+  .theme-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    min-width: 42px;
+    text-align: right;
+    transition: color 0.35s ease;
+    white-space: nowrap;
+  }
+  .theme-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 120px;
+    height: 6px;
+    border-radius: 3px;
+    background: linear-gradient(to right, #fafaf8 0%, #d2f34a 20%, #64b5f6 40%, #ff7043 60%, #26a69a 80%, #0a0a0a 100%);
+    outline: none;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    transition: border-color 0.35s ease;
+  }
+  .theme-slider:hover { border-color: var(--ink); }
+  .theme-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--surface);
+    box-shadow: 0 0 0 1px var(--border), 0 1px 4px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: background 0.35s ease, border-color 0.35s ease;
+  }
+  .theme-slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--surface);
+    box-shadow: 0 0 0 1px var(--border), 0 1px 4px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: background 0.35s ease, border-color 0.35s ease;
+  }
 
   /* Hero */
   .hero {
@@ -137,14 +280,14 @@
     font-size: 0.88rem;
     font-weight: 400;
     color: #aaa;
-    transition: color 0.2s, border-color 0.2s;
+    transition: color 0.35s ease, border-color 0.35s ease;
   }
   .tab-list li:first-child button { padding-left: 0; }
   .tab-list li button:hover { color: var(--ink); }
   .tab-list li button.active {
     color: var(--ink);
     font-weight: 500;
-    border-bottom-color: var(--ink);
+    border-bottom-color: var(--accent);
   }
 
   .content-panel { min-height: 300px; }
@@ -190,12 +333,12 @@
     color: var(--ink-muted);
     padding: 0.3rem 0.75rem;
     border-radius: 100px;
-    transition: background 0.2s, color 0.2s, border-color 0.2s;
+    transition: background 0.35s ease, color 0.35s ease, border-color 0.35s ease;
   }
   .tag:hover {
-    background: var(--ink);
+    background: var(--accent);
     color: var(--surface);
-    border-color: var(--ink);
+    border-color: var(--accent);
   }
 
   .cta-row { display: flex; gap: 1rem; align-items: center; }
@@ -205,14 +348,14 @@
     font-weight: 500;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    background: var(--ink);
+    background: var(--accent);
     color: var(--surface);
     border: none;
     padding: 0.75rem 1.6rem;
     cursor: pointer;
-    transition: opacity 0.2s;
+    transition: opacity 0.35s ease;
   }
-  .btn-primary:hover { opacity: 0.75; }
+  .btn-primary:hover { opacity: 0.8; }
   .btn-secondary {
     font-family: 'DM Sans', sans-serif;
     font-size: 0.82rem;
@@ -223,7 +366,7 @@
     background: none;
     border: none;
     cursor: pointer;
-    transition: color 0.2s;
+    transition: color 0.35s ease;
   }
   .btn-secondary:hover { color: var(--ink); }
 
@@ -300,7 +443,7 @@
     font-size: 0.75rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .case-card:hover .case-card-placeholder {
     transform: scale(1.06);
@@ -399,11 +542,11 @@
     font-weight: 500;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    background: var(--ink);
+    background: var(--accent);
     color: var(--surface);
     text-decoration: none;
     padding: 0.85rem 2rem;
-    transition: opacity 0.2s;
+    transition: opacity 0.35s ease;
     margin-bottom: 2.5rem;
   }
   .contact-email:hover { opacity: 0.75; }
@@ -419,7 +562,7 @@
     text-decoration: none;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    transition: color 0.2s;
+    transition: color 0.35s ease;
   }
   .social-links a:hover { color: var(--ink); }
 
@@ -432,7 +575,7 @@
     align-items: center;
   }
   footer span { font-size: 0.78rem; color: var(--ink-muted); }
-  footer a { font-size: 0.78rem; color: var(--ink-muted); text-decoration: none; transition: color 0.2s; }
+  footer a { font-size: 0.78rem; color: var(--ink-muted); text-decoration: none; transition: color 0.35s ease; }
   footer a:hover { color: var(--ink); }
 
   /* Scroll animations */
@@ -459,7 +602,6 @@
   @media (max-width: 600px) {
     nav { padding: 1rem 1.5rem; }
     .logo { font-size: 1.5rem; }
-    .nav-right { gap: 1.5rem; }
     .tab-list li button { font-size: 0.8rem; padding: 0.5rem 0.6rem 0.6rem; }
     footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem; }
   }
@@ -470,17 +612,11 @@
 
   <nav>
     <a href="#" class="logo">Deepak Sharma</a>
-    <div class="nav-right">
-      <ul class="nav-links">
-        <li><a href="#work">Work</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-      <button class="theme-toggle" aria-label="Toggle dark mode">
-        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-      </button>
-    </div>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
   </nav>
 
   <main class="hero">
@@ -666,6 +802,16 @@
     <a href="mailto:inbox.deepaksharma@gmail.com">inbox.deepaksharma@gmail.com</a>
   </footer>
 
+  <div class="theme-slider-wrap">
+    <button class="theme-trigger" aria-label="Toggle theme picker">
+      <span class="theme-trigger-dot"></span>
+    </button>
+    <div class="theme-slider-inner">
+      <input type="range" class="theme-slider" min="0" max="5" value="0" step="1" aria-label="Change color theme">
+      <span class="theme-label">Light</span>
+    </div>
+  </div>
+
 </div>
 
 <script>
@@ -697,17 +843,42 @@
   }, { threshold: 0.15 });
   reveals.forEach(function(el) { observer.observe(el); });
 
-  // Dark mode toggle
-  var toggle = document.querySelector('.theme-toggle');
-  var html = document.documentElement;
-  var saved = localStorage.getItem('theme');
-  if (saved) html.setAttribute('data-theme', saved);
+  // Theme slider toggle
+  var trigger = document.querySelector('.theme-trigger');
+  var wrap = document.querySelector('.theme-slider-wrap');
+  trigger.addEventListener('click', function() {
+    wrap.classList.toggle('open');
+  });
+  document.addEventListener('click', function(e) {
+    if (!wrap.contains(e.target)) wrap.classList.remove('open');
+  });
 
-  toggle.addEventListener('click', function() {
-    var current = html.getAttribute('data-theme');
-    var next = current === 'dark' ? 'light' : 'dark';
-    html.setAttribute('data-theme', next);
-    localStorage.setItem('theme', next);
+  // Theme slider
+  var themes = ['light', 'neon', 'ocean', 'ember', 'forest', 'dark'];
+  var themeNames = { light: 'Light', neon: 'Neon', ocean: 'Ocean', ember: 'Ember', forest: 'Forest', dark: 'Dark' };
+  var slider = document.querySelector('.theme-slider');
+  var label = document.querySelector('.theme-label');
+  var html = document.documentElement;
+
+  function applyTheme(idx) {
+    var theme = themes[idx];
+    if (theme === 'light') {
+      html.removeAttribute('data-theme');
+    } else {
+      html.setAttribute('data-theme', theme);
+    }
+    label.textContent = themeNames[theme];
+    slider.value = idx;
+    localStorage.setItem('theme', theme);
+  }
+
+  var saved = localStorage.getItem('theme');
+  if (saved && themes.indexOf(saved) > -1) {
+    applyTheme(themes.indexOf(saved));
+  }
+
+  slider.addEventListener('input', function() {
+    applyTheme(parseInt(this.value));
   });
 </script>
 </body>
