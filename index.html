@@ -255,6 +255,80 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-gradient-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    filter: blur(60px) saturate(2);
+    opacity: 0.8;
+    pointer-events: none;
+  }
+  .hero-gradient-bg .blob {
+    position: absolute;
+    border-radius: 50%;
+    will-change: transform;
+  }
+  .hero-gradient-bg .blob-1 {
+    width: 45%;
+    aspect-ratio: 1;
+    background: radial-gradient(circle, #ff8c42 0%, transparent 65%);
+    top: -10%;
+    left: -5%;
+    animation: liquid1 14s ease-in-out infinite;
+  }
+  .hero-gradient-bg .blob-2 {
+    width: 40%;
+    aspect-ratio: 1;
+    background: radial-gradient(circle, #4a90d9 0%, transparent 65%);
+    top: 20%;
+    right: -10%;
+    animation: liquid2 16s ease-in-out infinite;
+  }
+  .hero-gradient-bg .blob-3 {
+    width: 50%;
+    aspect-ratio: 1;
+    background: radial-gradient(circle, #f0a060 0%, transparent 65%);
+    bottom: -15%;
+    left: 25%;
+    animation: liquid3 18s ease-in-out infinite;
+  }
+  .hero-gradient-bg .blob-4 {
+    width: 35%;
+    aspect-ratio: 1;
+    background: radial-gradient(circle, #5ba8e8 0%, transparent 65%);
+    top: 50%;
+    left: -10%;
+    animation: liquid4 20s ease-in-out infinite;
+  }
+
+  @keyframes liquid1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(15%, 20%) scale(1.1); }
+    50% { transform: translate(5%, 35%) scale(0.95); }
+    75% { transform: translate(-10%, 15%) scale(1.05); }
+  }
+  @keyframes liquid2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(-20%, 10%) scale(1.15); }
+    50% { transform: translate(-10%, -15%) scale(0.9); }
+    75% { transform: translate(5%, -10%) scale(1.1); }
+  }
+  @keyframes liquid3 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(10%, -20%) scale(1.05); }
+    50% { transform: translate(-15%, -10%) scale(1.15); }
+    75% { transform: translate(-5%, 10%) scale(0.95); }
+  }
+  @keyframes liquid4 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(20%, -15%) scale(1.1); }
+    50% { transform: translate(15%, 10%) scale(0.9); }
+    75% { transform: translate(-5%, 20%) scale(1.05); }
   }
 
   .hero-left {
@@ -262,6 +336,8 @@
     flex-direction: column;
     padding: 5rem 3.5rem 4rem;
     border-right: 1px solid var(--border);
+    position: relative;
+    z-index: 1;
   }
 
   .tab-list {
@@ -375,6 +451,7 @@
 
   .hero-right {
     position: relative;
+    z-index: 1;
     background: var(--photo-bg);
     min-height: 520px;
     display: flex;
@@ -623,6 +700,13 @@
   </nav>
 
   <main class="hero">
+
+    <div class="hero-gradient-bg">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+      <div class="blob blob-4"></div>
+    </div>
 
     <div class="hero-left">
 
