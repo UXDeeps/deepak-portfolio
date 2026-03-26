@@ -115,7 +115,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid var(--border);
     transition: background 0.5s ease, border-color 0.5s ease;
   }
   .logo {
@@ -242,7 +241,6 @@
     display: flex;
     flex-direction: column;
     padding: 5rem 3.5rem 4rem;
-    border-right: 1px solid var(--border);
     position: relative;
     z-index: 1;
   }
@@ -251,7 +249,6 @@
     list-style: none;
     display: flex;
     flex-wrap: wrap;
-    border-bottom: 1px solid var(--border);
     margin-bottom: 3rem;
   }
 
@@ -359,39 +356,39 @@
   .hero-right {
     position: relative;
     z-index: 1;
-    background: var(--photo-bg);
     min-height: 520px;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 3rem;
   }
-  .photo-placeholder {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    color: #b0ada8;
+  .photo-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    aspect-ratio: 4 / 5;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
   }
-  .photo-placeholder svg { width: 48px; height: 48px; opacity: 0.45; }
-  .photo-placeholder span {
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    opacity: 0.65;
-  }
-  .hero-photo {
+  .photo-wrapper img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
+  }
+  .photo-wrapper::after {
+    content: '';
     position: absolute;
     inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.35) 100%);
+    pointer-events: none;
+    border-radius: 24px;
   }
 
   /* Case Studies */
   .case-studies {
     padding: 5rem 3.5rem;
-    border-top: 1px solid var(--border);
   }
   .case-studies-header {
     margin-bottom: 3rem;
@@ -457,7 +454,7 @@
   /* About Section */
   .about {
     padding: 5rem 3.5rem;
-    border-top: 1px solid var(--border);
+    background: #ffffff;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
@@ -501,7 +498,6 @@
   /* Contact Section */
   .contact {
     padding: 5rem 3.5rem;
-    border-top: 1px solid var(--border);
     text-align: center;
   }
   .contact-headline {
@@ -556,7 +552,6 @@
   /* Footer */
   footer {
     padding: 1.5rem 3.5rem;
-    border-top: 1px solid var(--border);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -579,8 +574,8 @@
   /* Responsive */
   @media (max-width: 860px) {
     .hero { grid-template-columns: 1fr; }
-    .hero-left { border-right: none; border-bottom: 1px solid var(--border); padding: 3rem 1.5rem; }
-    .hero-right { min-height: 320px; }
+    .hero-left { padding: 3rem 1.5rem; }
+    .hero-right { min-height: 320px; padding: 2rem 1.5rem; }
     .case-studies-grid { grid-template-columns: 1fr; }
     .case-studies { padding: 3rem 1.5rem; }
     .about { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 1.5rem; }
@@ -616,27 +611,16 @@
     <div class="hero-left">
 
       <ul class="tab-list" role="tablist">
-        <li><button class="active" role="tab" data-tab="anyone">For anyone</button></li>
-        <li><button role="tab" data-tab="recruiter">Recruiter</button></li>
-        <li><button role="tab" data-tab="director">Design director</button></li>
-        <li><button role="tab" data-tab="pm">Product manager</button></li>
-        <li><button role="tab" data-tab="engineer">Engineer</button></li>
-        <li><button role="tab" data-tab="founder">Founder</button></li>
+        <li><button class="active" role="tab" data-tab="recruiter">Recruiters</button></li>
+        <li><button role="tab" data-tab="designer">Designers</button></li>
+        <li><button role="tab" data-tab="engineer">Engineers</button></li>
+        <li><button role="tab" data-tab="founder">Founders</button></li>
+        <li><button role="tab" data-tab="anyone">Anyone else</button></li>
       </ul>
 
       <div class="content-panel">
 
-        <div class="message active" data-panel="anyone">
-          <h1 class="message-headline">Hello, I'm a designer who believes <em>good work</em> should feel inevitable.</h1>
-          <p class="message-body">I've spent 12 years making products that people actually want to use — across startups, agencies, and companies you've heard of. I care about the craft, the process, and the people I do it with.</p>
-          <div class="message-tags">
-            <span class="tag">Product design</span>
-            <span class="tag">Design systems</span>
-            <span class="tag">Brand</span>
-          </div>
-        </div>
-
-        <div class="message" data-panel="recruiter">
+        <div class="message active" data-panel="recruiter">
           <h1 class="message-headline">I'm currently open to the <em>right</em> senior product design role.</h1>
           <p class="message-body">12 years of experience. Led design at two startups, shipped at scale at two public companies. Strong in systems thinking, cross-functional collaboration, and raising the craft bar on any team I join.</p>
           <div class="cta-row">
@@ -645,21 +629,12 @@
           </div>
         </div>
 
-        <div class="message" data-panel="director">
-          <h1 class="message-headline">I'll raise your team's bar — <em>and</em> ship the work.</h1>
-          <p class="message-body">I lead by doing. I've built design systems from scratch, mentored teams of eight, and run cross-functional design crits that actually changed product direction. I care as much about the designer's growth as the output.</p>
+        <div class="message" data-panel="designer">
+          <h1 class="message-headline">I care about the craft as much as <em>you</em> do.</h1>
+          <p class="message-body">I've built design systems from scratch, mentored teams of eight, and run cross-functional design crits that actually changed product direction. I care as much about a designer's growth as the output.</p>
           <div class="cta-row">
             <button class="btn-primary">See process work</button>
-            <button class="btn-secondary">Read references</button>
-          </div>
-        </div>
-
-        <div class="message" data-panel="pm">
-          <h1 class="message-headline">I'll be the partner who makes <em>your</em> vision legible.</h1>
-          <p class="message-body">I speak fluent roadmap, prioritization, and "why does this matter." I prototype fast, kill bad ideas early, and help you walk into stakeholder reviews with something that actually lands.</p>
-          <div class="cta-row">
-            <button class="btn-primary">See case studies</button>
-            <button class="btn-secondary">Learn more</button>
+            <button class="btn-secondary">View design systems</button>
           </div>
         </div>
 
@@ -681,16 +656,22 @@
           </div>
         </div>
 
+        <div class="message" data-panel="anyone">
+          <h1 class="message-headline">Hello, I'm a designer who believes <em>good work</em> should feel inevitable.</h1>
+          <p class="message-body">I've spent 12 years making products that people actually want to use — across startups, agencies, and companies you've heard of. I care about the craft, the process, and the people I do it with.</p>
+          <div class="message-tags">
+            <span class="tag">Product design</span>
+            <span class="tag">Design systems</span>
+            <span class="tag">Brand</span>
+          </div>
+        </div>
+
       </div>
     </div>
 
     <div class="hero-right">
-      <div class="photo-placeholder">
-        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="24" cy="18" r="8" stroke="#888" stroke-width="1.5"/>
-          <path d="M8 42c0-8.837 7.163-16 16-16s16 7.163 16 16" stroke="#888" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-        <span>Your photo here</span>
+      <div class="photo-wrapper">
+        <img src="deepak-profile.png" alt="Deepak Sharma working at his desk">
       </div>
     </div>
 
